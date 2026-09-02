@@ -1,0 +1,41 @@
+#подключение библиотек
+from PyQt5.QtCore import Qt
+from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QHBoxLayout, QVBoxLayout, QLabel, QMessageBox, QRadioButton
+app = QApplication([])
+def lose():
+    lose_win = QMessageBox()
+    lose_win.setText('Нет, оказывается, это синий кит')
+    lose_win.exec_()
+def victory():
+    victory_win = QMessageBox()
+    victory_win.setText('Верно! Вы выиграли!')
+    victory_win.exec_()
+main_win = QWidget()
+main_win.resize(400, 200)
+main_win.setWindowTitle('Викторина')
+question = QLabel('Какое животное в мире самое большое?')
+but1 = QRadioButton('Синий кит')
+but2 = QRadioButton('Касатка')
+but3 = QRadioButton('Слон')
+but4 = QRadioButton('Белый медведь')
+layout1 = QHBoxLayout()
+layout2 = QHBoxLayout()
+layout3 = QHBoxLayout()
+layout4 = QVBoxLayout()
+layout1.addWidget(question, alignment=Qt.AlignCenter)
+layout2.addWidget(but1, alignment=Qt.AlignCenter)
+layout2.addWidget(but2, alignment=Qt.AlignCenter)
+layout3.addWidget(but3, alignment=Qt.AlignCenter)
+layout3.addWidget(but4, alignment=Qt.AlignCenter)
+layout4.addLayout(layout1)
+layout4.addLayout(layout2)
+layout4.addLayout(layout3)
+main_win.setLayout(layout4)
+but1.clicked.connect(victory)
+but2.clicked.connect(lose)
+but3.clicked.connect(lose)
+but4.clicked.connect(lose)
+
+main_win.show()
+
+app.exec_()
